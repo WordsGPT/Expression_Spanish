@@ -1,0 +1,79 @@
+experiments:
+  
+  arousal_GPT4.1-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "arousal_prompt.txt"
+    model_name: "gpt-4.1-mini-2025-04-14"
+
+  arousal_GPT5-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "arousal_prompt.txt"
+    model_name: "gpt-5-mini-2025-08-07"
+
+  arousal_GPT4o-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "arousal_prompt.txt"
+    model_name: "gpt-4o-mini-2024-07-18"
+
+
+
+  concretion_GPT4.1-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "concretion_prompt.txt"
+    model_name: "gpt-4.1-mini-2025-04-14"
+
+  concretion_GPT5-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "concretion_prompt.txt"
+    model_name: "gpt-5-mini-2025-08-07"
+
+  concretion_GPT4o-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "concretion_prompt.txt"
+    model_name: "gpt-4o-mini-2024-07-18"
+    
+
+
+  familiarity_GPT4.1-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "familiarity_prompt.txt"
+    model_name: "gpt-4.1-mini-2025-04-14"
+
+  familiarity_GPT5-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "familiarity_prompt.txt"
+    model_name: "gpt-5-mini-2025-08-07"
+
+  familiarity_GPT4o-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "familiarity_prompt.txt"
+    model_name: "gpt-4o-mini-2024-07-18"
+        
+
+
+  valencia_GPT4.1-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "valencia_prompt.txt"
+    model_name: "gpt-4.1-mini-2025-04-14"
+
+  valencia_GPT5-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "valencia_prompt.txt"
+    model_name: "gpt-5-mini-2025-08-07"
+
+  valencia_GPT4o-mini:
+    dataset_name: "DILEA_MWE.xlsx"
+    dataset_column: "expression"
+    prompt: "valencia_prompt.txt"
+    model_name: "gpt-4o-mini-2024-07-18"
