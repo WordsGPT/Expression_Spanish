@@ -38,12 +38,12 @@ Each experiment folder should contain:
 
    **Available EXPERIMENT_NAME options:**
 
-   | Option                | Description                 |
-   | --------------------- | --------------------------- |
-   | `<experiment_name>` | Process specific experiment |
-   | `"all"`             | Process all experiments     |
-   | `"failed"`          | Retry failed experiments    |
-   | `"status"`          | Show failed experiments     |
+   | Option                | Description                                       |
+   | --------------------- | ------------------------------------------------- |
+   | `<experiment_name>` | Process specific experiment                       |
+   | `all`               | Process all exisiting experiments in config.yaml |
+   | `failed`            | Retry failed experiments                          |
+   | `status`            | Show failed experiments                           |
 2. Run the experiment by executing:
 
    ```bash
@@ -54,13 +54,13 @@ Each experiment folder should contain:
 
    **Available EXPERIMENT_NAME options:**
 
-   | Option                | Description                                   |
-   | --------------------- | --------------------------------------------- |
-   | `<experiment_name>` | Process specific experiment                   |
-   | `"all"`             | Process all experiments in the batches folder |
-   | `"failed"`          | Retry failed experiments                      |
-   | `"remain"`          | Check and download batches still in tracking  |
-   | `"status"`          | Show batches still in tracking                |
+   | Option                | Description                                                      |
+   | --------------------- | ---------------------------------------------------------------- |
+   | `<experiment_name>` | Process specific experiment                                      |
+   | `all`               | Process all experiments that have batches in the batches folder |
+   | `failed`            | Retry failed experiments                                         |
+   | `remain`            | Check and download batches still in tracking                     |
+   | `status`            | Show batches still in tracking                                   |
 
 ## Generate results:
 
@@ -73,9 +73,9 @@ Each experiment folder should contain:
 
    **Available EXPERIMENT_NAME options:**
 
-   | Option                | Description                 |
-   | --------------------- | --------------------------- |
-   | `<experiment_name>` | Process specific experiment |
-   | `"all"`             | Process all experiments     |
-   | `"failed"`          | Retry failed experiments    |
-   | `"status"`          | Show failed experiments     |
+   | Option                | Description                                                                                              |
+   | --------------------- | -------------------------------------------------------------------------------------------------------- |
+   | `<experiment_name>` | Process specific experiment                                                                              |
+   | `all`               | Process all experiments that have batches and results (in the bathces and results folders respectively) |
+   | `failed`            | Retry failed experiments                                                                                 |
+   | `status`            | Show failed experiments                                                                                  |
