@@ -331,18 +331,55 @@ if __name__ == "__main__":
             print("No experiments found in config.yaml.")
             exit()
         
-        print(f"Processing {len(all_experiments_from_config)} experiments from config...")
-        successful = 0
-        failed = 0
+        print(f"Checking {len(all_experiments_from_config)} experiments from config...")
+        
+        # Filter experiments that have both batches and results files
+        paths = get_experiment_paths(EXPERIMENT_PATH)
+        experiments_to_process = []
+        incomplete_experiments = 0
         
         for exp_name in all_experiments_from_config:
+            matches_batches = glob.glob(os.path.join(paths['batches'], f"*{exp_name}*.jsonl"))
+            matches_results = glob.glob(os.path.join(paths['results'], f"*{exp_name}*.jsonl"))
+            
+            has_batches = len(matches_batches) > 0
+            has_results = len(matches_results) > 0
+            
+            if has_batches and has_results:
+                experiments_to_process.append(exp_name)
+                print(f"{exp_name}: has both batches and results files")
+            elif has_batches or has_results:
+                # Has only one of them, add to failed experiments
+                failed_experiments = get_failed_experiments(EXPERIMENT_PATH)
+                if exp_name not in failed_experiments:
+                    add_failed_experiment(exp_name, EXPERIMENT_PATH)
+                    incomplete_experiments += 1
+                    print(f"{exp_name}: missing {'results' if has_batches else 'batches'} file, added to failed experiments")
+                else:
+                    print(f"{exp_name}: missing {'results' if has_batches else 'batches'} file, already in failed experiments")
+            else:
+                print(f"{exp_name}: no batches or results files found")
+        
+        if not experiments_to_process:
+            print("No experiments with both batches and results files found.")
+            exit()
+        
+        print(f"\nProcessing {len(experiments_to_process)} experiments with complete files...")
+        successful = 0
+        processing_failed = 0
+        
+        for exp_name in experiments_to_process:
             print(f"\nProcessing experiment: {exp_name}")
             if process_single_experiment(exp_name, EXPERIMENT_PATH):
                 successful += 1
             else:
-                failed += 1
+                processing_failed += 1
         
-        print(f"\nProcessing complete: {successful} successful, {failed} failed")
+        total_failed = incomplete_experiments + processing_failed
+        print(f"\nProcessing complete: {successful} successful, {total_failed} failed")
+        if total_failed > 0:
+            print(f"  - {incomplete_experiments} failed due to incomplete files")
+            print(f"  - {processing_failed} failed during processing")
     else:
         # Process single experiment
         process_single_experiment(EXPERIMENT_NAME, EXPERIMENT_PATH)
