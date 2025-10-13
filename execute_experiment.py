@@ -29,16 +29,20 @@ def get_experiment_prefixes_from_batches(experiment_path):
     prefixes = set()
     if os.path.exists(paths['batches']):
         for fname in os.listdir(paths['batches']):
-            if "_prompt" in fname:
-                prefix = fname.split("_prompt")[0] + "_prompt"
-                prefixes.add(prefix)
+            if "_batch" in fname and fname.endswith('.jsonl'):
+                # Extract experiment name including model
+                batch_index = fname.find('_batch')
+                if batch_index > 0:
+                    prefix = fname[:batch_index]  # Everything before "_batch"
+                    prefixes.add(prefix)
     return list(prefixes)
 
 def get_batches_for_experiment(prefix, experiment_path):
     """Devuelve la lista de batches que empiezan por el prefijo dado."""
     paths = get_experiment_paths(experiment_path)
     if os.path.exists(paths['batches']):
-        return [f for f in os.listdir(paths['batches']) if f.startswith(prefix)]
+        return [f for f in os.listdir(paths['batches']) 
+                if f.startswith(prefix + "_") and f.endswith('.jsonl')]
     return []
 
 def create_batch_tracking_file(experiment_path, file_path=None):
