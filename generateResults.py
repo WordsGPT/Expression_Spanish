@@ -71,10 +71,13 @@ def calculate_weighted_sum_1_to_7(top_logprobs_list):
     
     return weighted_sum
 
-def openAI_processing(results_content_file, batches_content_file):
+def openAI_processing(results_content_file, batches_content_file, experiment_name):
     match_key = 'custom_id'
     lookup = {entry[match_key]: entry for entry in batches_content_file if match_key in entry}
     combined_data = []
+    
+    # Extract the first part of experiment name (before underscore) for column name
+    column_name = experiment_name.split('_')[0] if '_' in experiment_name else experiment_name
     
     for entry in results_content_file:
         entry_result = {}
@@ -108,7 +111,7 @@ def openAI_processing(results_content_file, batches_content_file):
             feature_value = combined_entry['response']['body']['choices'][0]['message']['content']
 
             entry_result['expression'] = word_input
-            entry_result['familiarity'] = feature_value
+            entry_result[column_name] = feature_value
 
             if logprob is not None:
                 entry_result['logprob'] = logprob
@@ -263,7 +266,7 @@ def process_single_experiment(experiment_name, experiment_path):
             print("Expected OpenAI batch format with 'custom_id', cannot process results.")
             return False
 
-        combined_data = openAI_processing(results_content_file, batches_content_file)
+        combined_data = openAI_processing(results_content_file, batches_content_file, experiment_name)
 
         if not combined_data:
             if not is_in_failed_list:
